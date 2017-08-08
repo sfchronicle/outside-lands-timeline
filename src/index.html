@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.seo_title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="__sync_contentCategory" content="meterA">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+
+    <%= !json.project.embedded ? t.include("partials/_paywall.html") : t.include("partials/_embedframe.html") %>
+
+    <%= t.include("partials/_head.html") %>
+
+  </head>
+
+  <%= !json.project.embedded ? "<body>" : "<body is='responsive-body'>" %>
+
+    <%= t.include("partials/_nav.html") %>
+
+    <div class="swiper-container flex-container">
+
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide intro" style="background-image: url('http://ww2.hdnux.com/photos/54/11/64/13640205/3/1500x1000.jpg'); background-size: center; background-position: center center; background-repeat: no-repeat">
+          <div class="inner-content">
+            <div class="main-hed"><%=json.outside_lands_timeline.Hed%></div>
+            <div class="main-deck"><%=json.outside_lands_timeline.Deck%></div>
+
+            <div class="author">By <a href="mailto:avaziri@sfchronicle.com">Aidin Vaziri</a></div>
+
+            <div class="instructions mobile">
+              <span>Swipe right</span><br>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+            <div class="instructions desktop">
+              <span>Scroll or click the arrow key</span><br>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+
+        <% json.outside_lands_timeline.timeline.forEach(function(t) { %>
+
+          <% if (t.Type == "Text") { %>
+
+            <div class="swiper-slide flex-slide">
+              <div class="inner-content">
+                <div class="year"><%= t.Year %></div>
+                <div class="desc"><span class="lineup-hed">Lineup: </span><span class="lineup-class"><%= t.Text %></span></div>
+              </div>
+              <% if (t.Photographer){ %>
+                <div class="caption floating"><%=t.Photographer%></div>
+              <% } %>
+            </div>
+
+          <% } else if (t.Type == "Horizontal") { %>
+
+            <div class="swiper-slide horizontal-slide">
+              <div class="inner-content">
+                <div class="year"><%= t.Year %></div>
+                <div class="horizontal-img">
+                  <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg"></img>
+                  <div class="caption"><%=t.Photographer%></div>
+                </div>
+                <div class="desc"><%= t.Text %></div>
+              </div>
+            </div>
+
+          <% } else if (t.Type == "Vertical") { %>
+
+            <div class="swiper-slide vertical-slide">
+              <div class="inner-content">
+                <div class="year"><%= t.Year %></div>
+                <div class="vertical-img">
+                  <img src="http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg"></img>
+                  <div class="caption"><%=t.Caption%> <span class="byline"><%=t.Photographer%></span></div>
+                </div>
+                <div class="desc"><%= t.Text %></div>
+              </div>
+            </div>
+
+          <% } else if (t.Type == "Wide") { %>
+
+            <div class="bg swiper-slide <%=t.ImageClass%>" style="background-image: url('http://ww2.hdnux.com/photos/54/11/64/<%= t.Image %>/3/1500x1000.jpg'); background-size: center; background-position: center center; background-repeat: no-repeat">
+              <div class="overlay">
+                <div class="desc "><%= t.Text %></div>
+              </div>
+
+              <div class="caption floating"><%=t.Caption%> <span class="byline"><%=t.Photographer%></span></div>
+            </div>
+
+          <% } %>
+
+        <% }); %>
+
+       <div class="swiper-slide conclusion-slide">
+
+        <div class="inner-content">
+
+         <div class="link-group">
+           <p class="header">Read more: </p>
+           <p><a href="http://www.sfchronicle.com/outside-lands/" target="_blank">Guide to Outside Lands</a></p>
+         </div>
+
+        <div class="link-group">
+          <p class="header">Credits</p>
+            <div class="entry">Aidin Vaziri &bull;
+              <a href="mailto:avaziri@sfchronicle.com">avaziri@sfchronicle.com</a> &bull;
+              <a href = "https://twitter.com/MusicSF" target="_blank">@MusicSF</a>
+            </div>
+            <div class="entry">Mariecar Mendoza &bull;
+              <a href="mailto:mmendoza@sfchronicle.com">mmendoza@sfchronicle.com</a> &bull;
+              <a href = "https://twitter.com/SFMarMendoza" target="_blank">@SFMarMendoza</a>
+            </div>
+            <div class="entry">Emma O'Neill &bull;
+              <a href="mailto:eoneill@sfchronicle.com">eoneill@sfchronicle.com</a> &bull;
+              <a href = "https://twitter.com/emmaruthoneill" target="_blank">@emmaruthoneill</a>
+            </div>
+            <div class="entry">Kimberly Chua &bull;
+              <a href="mailto:kchua@sfchronicle.com">kchua@sfchronicle.com</a> &bull;
+              <a href = "https://twitter.com/KimberlyAChua" target="_blank">@KimberlyAChua</a>
+            </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+    <script>
+      var mySwiper = new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: false,
+        grabCursor: true,
+        pagination: '.swiper-pagination',
+        keyboardControl: true,
+        mousewheelControl: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        pagination: '.swiper-pagination',
+        paginationType: 'progress'
+      })
+    </script>
+
+    <script src="app.js" async></script>
+    <%= t.include("partials/_helloSFC.html") %>
+
+  </body>
+</html>
